@@ -1,0 +1,133 @@
+\documentclass[10pt,twocolumn,oneside,a4paper]{article}
+\setlength{\columnsep}{10pt}                    % Espaçamento entre colunas
+\setlength{\columnseprule}{0pt}                 % Linha entre colunas (0 = sem linha)
+
+\usepackage{amsthm}                             % Definições, teoremas
+\usepackage{amssymb}
+\usepackage{fontspec}                           % Configuração de fontes
+\usepackage{color}
+\usepackage[x11names]{xcolor}
+\usepackage{listings}                           % Exibição de código
+\usepackage{fancyhdr}                           % Cabeçalho e rodapé
+\usepackage{graphicx}                           % Imagens
+\usepackage{enumerate}
+\usepackage{titlesec}
+\usepackage{amsmath}
+\usepackage[CheckSingle, CJKmath]{xeCJK}
+\usepackage{CJKulem}
+\usepackage{tikz}                               % Desenho de autômatos finitos
+\usepackage{afterpage}                          % Controle de conteúdo pós-página
+\usepackage{multicol}
+
+\usepackage{amsmath, courier, listings, fancyhdr, graphicx}
+\topmargin=0pt
+\headsep=2pt
+\textheight=790pt
+\footskip=0pt
+\voffset=-50pt
+\textwidth=545pt
+\marginparsep=0pt
+\marginparwidth=0pt
+\marginparpush=0pt
+\oddsidemargin=0pt
+\evensidemargin=0pt
+\hoffset=-42pt
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setmainfont{Consolas}
+\setmonofont{Consolas}
+\XeTeXlinebreakskip = 0pt plus 1pt             % Espaçamento entre parágrafos
+\setcounter{secnumdepth}{3}                    % Profundidade da numeração no sumário
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\makeatletter
+\lst@CCPutMacro\lst@ProcessOther {"2D}{\lst@ttfamily{-{}}{-{}}}
+\@empty\z@\@empty
+\makeatother
+\lstset{                                       % Configuração de exibição de código
+    language=C++,                              % Linguagem do código
+    basicstyle=\footnotesize\ttfamily,         % Tamanho e fonte do código
+    %numbers=left,                             % Números de linha (esquerda)
+    numberstyle=\footnotesize,                 % Tamanho dos números de linha
+    stepnumber=1,                              % Numeração a cada linha
+    numbersep=5pt,                             % Distância número-código
+    backgroundcolor=\color{white},             % Cor de fundo
+    showspaces=false,                          % Mostrar espaços
+    showstringspaces=false,                    % Sublinhar espaços em strings
+    showtabs=false,                            % Mostrar tabs
+    frame=false,                               % Moldura ao redor do código
+    tabsize=2,                                 % Tamanho do tab
+    captionpos=b,                              % Legenda abaixo
+    breaklines=true,                           % Quebra de linha automática
+    breakatwhitespace=false,                   % Quebrar apenas em espaços
+    escapeinside={\%*}{*)},                    % Delimitadores para comentários no código
+    morekeywords={*},                          % Palavras-chave extras
+    keywordstyle=\bfseries\color{Blue1},
+    commentstyle=\itshape\color{Red4},
+    stringstyle=\itshape\color{Green4},
+}
+
+%----------------------------------------------------------------------------------------
+%   Ajuste de espaçamento das seções
+%----------------------------------------------------------------------------------------
+
+\makeatletter
+\let\origsection\section
+\renewcommand\section{\@ifstar{\starsection}{\nostarsection}}
+
+\newcommand\nostarsection[1]
+{\sectionprelude\origsection{#1}\sectionpostlude}
+
+\newcommand\starsection[1]
+{\sectionprelude\origsection*{#1}\sectionpostlude}
+
+\newcommand\sectionprelude{%
+  \vspace{-10pt} % Espaço antes da seção (ajuste se quiser mais/menos)
+}
+\newcommand\sectionpostlude{%
+  \vspace{-10pt} % Espaço depois da seção (ajuste se quiser mais/menos)
+}
+\makeatother
+
+% ---------------------------------------------------------------------------------------
+\usepackage{tocloft}
+\cftsetindents{subsection}{1.5em}{2.5em}
+
+% ===== CABEÇALHO E RODAPÉ =====
+% ALTERE AQUI: nome da equipe e universidade
+\def\NomeEquipe{Só vim pelos balões}
+\def\Universidade{CEFET-MG}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancypagestyle{plain}{
+    \fancyhf{}
+    \fancyhead[C]{\NomeEquipe}
+    \fancyhead[L]{\Universidade}
+    \fancyhead[R]{\thepage}
+    \renewcommand{\headrulewidth}{0.4pt}
+}
+
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\begin{document}
+\pagestyle{fancy}
+\fancyfoot{}
+\fancyhead[C]{\NomeEquipe}
+\fancyhead[L]{\Universidade}
+\fancyhead[R]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\contentsname}{Sumário}           % "Contents" → "Sumário"
+
+\textbf{
+\scriptsize
+\begin{multicols}{2}
+  \tableofcontents
+\end{multicols}
+}
+\newpage
+\input{content.tex}
+
+\end{document}
