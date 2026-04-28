@@ -18,4 +18,4 @@ A compilacao e automatizada via GitHub Actions. Basta editar os arquivos, enviar
 
 ## Créditos
 
-Este codebook é baseado no template (Mashu-Codebook)[https://github.com/Yuankai619/Mashu-Codebook]. Fiz adaptações no layout, traduzi para português e personalizei as seções e códigos para o meu uso.
+Este codebook é baseado no template [Mashu-Codebook](https://github.com/Yuankai619/Mashu-Codebook). Fiz adaptações no layout, traduzi para português e personalizei as seções e códigos para o meu uso.
