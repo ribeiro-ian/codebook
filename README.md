@@ -1,13 +1,13 @@
-# Codebook de Programacao Competitiva
+# Codebook de Programação Competitiva
 
 [![Compilar Codebook](https://img.shields.io/github/actions/workflow/status/ribeiro-ian/codebook/compile.yml?style=for-the-badge&logo=github&label=Compilar%20Codebook)](https://github.com/ribeiro-ian/codebook/actions/workflows/compile.yml)
 ![GitHub Actions](https://img.shields.io/badge/github%20actions-%232671E5.svg?style=for-the-badge&logo=githubactions&logoColor=white)
 
 ---
 
-Este e o meu codebook pessoal para maratonas de programacao competitiva.
+Este é o meu codebook pessoal para maratonas de programação competitiva.
 
-A compilacao e automatizada via GitHub Actions. Basta editar os arquivos, enviar para o GitHub e o PDF e gerado automaticamente.
+A compilação é automatizada via GitHub Actions. Basta editar os arquivos, enviar para o GitHub e o PDF é gerado automaticamente.
 
 ## Como usar
 
