@@ -2,11 +2,11 @@
 using namespace std;
 using ll = long long;
 
-void solve() {
+void solve(){
     //code
 }
 
-int main() {
+int main(){
     ios_base::sync_with_stdio(0); cin.tie(0);
 
     int tc; cin >> tc;
