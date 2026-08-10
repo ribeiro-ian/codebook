@@ -9,12 +9,45 @@ mask ^ (1 << i)   // inverte bit i
 (mask >> i) & 1   // lê bit i (0 ou 1)
 mask & (1 << i)   // testa bit i (0 se desligado)
 
+bool isPowerOf2(int &n) {
+  return (n & (n - 1)) == 0;
+}
+int contarBits(int n) {
+  int ans = 0;
+  while (n > 0) {
+    n = n & (n - 1);
+    ans++;
+  }
+  return ans;
+}
+int to_binary(int n) {
+  int ans = 0;
+  int p = 1;
+  while (n > 0) {
+    int last_bit = (n & 1);
+    ans += p * last_bit;
+    p *= 10;
+    n >>= 1;
+  }
+  return ans;
+}
+void limparUltimosIBits(int &n, int i) {
+  int mask = (-1 << i);
+  n = n & mask;
+}
+void limparRangeBits(int &n, int i, int j) {
+  int a = (~0) << (j + 1); // ~0 == -1
+  int b = (1 << i) - 1;
+  int mask = a | b;
+  n = n & mask;
+}
+
 // --- Propriedades do conjunto ---
-__builtin_popcount(mask)   // quantos bits ligados
-__builtin_ctz(mask)    // índice do bit menos significativo ligado
-__builtin_clz(mask)    // zeros à esquerda (cuidado: UB se mask==0)
-(mask & (mask-1)) == 0   // mask é potência de 2 (exatamente 1 bit)
-mask == 0          // conjunto vazio
+__builtin_popcount(mask) // quantos bits ligados
+__builtin_ctz(mask)      // índice do bit menos significativo ligado
+__builtin_clz(mask)      // zeros à esquerda (cuidado: UB se mask==0)
+(mask & (mask - 1)) == 0 // mask é potência de 2 (exatamente 1 bit)
+mask == 0                // conjunto vazio
 
 // --- Iteração ---
 
@@ -22,12 +55,12 @@ mask == 0          // conjunto vazio
 for (int mask = 0; mask < (1 << n); mask++) { }
 
 // Todos os bits ligados de mask
-for (int tmp = mask; tmp; tmp &= tmp-1) {
+for (int tmp = mask; tmp; tmp &= tmp - 1) {
   int i = __builtin_ctz(tmp); // índice do bit
 }
 
 // Todos os subconjuntos de mask (incluindo vazio)
-for (int sub = mask; sub > 0; sub = (sub-1) & mask) { }
+for (int sub = mask; sub > 0; sub = (sub - 1) & mask) { }
 // Atenção: não itera o subconjunto vazio; adicione caso sub==0 se necessário
 
 // --- Máscaras úteis ---

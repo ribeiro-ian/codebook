@@ -2,7 +2,7 @@
 struct Dinic {
   struct Edge {
     int to, rev;
-    ll cap, flow;
+    int cap, flow;
   };
 
   int n;
@@ -11,9 +11,9 @@ struct Dinic {
 
   Dinic(int n) : n(n), g(n), level(n), ptr(n) {}
 
-  void add_edge(int u, int v, ll cap) {
+  void add_edge(int u, int v, int cap) {
     g[u].push_back({v, (int)g[v].size(), cap, 0});
-    g[v].push_back({u, (int)g[u].size()-1, 0, 0});
+    g[v].push_back({u, (int)g[u].size() - 1, 0, 0});
   }
 
   bool bfs(int s, int t) {
@@ -34,13 +34,13 @@ struct Dinic {
     return level[t] != -1;
   }
 
-  ll dfs(int u, int t, ll f) {
+  int dfs(int u, int t, int f) {
     if (u == t || f == 0) return f;
 
     for (int &i = ptr[u]; i < g[u].size(); i++) {
       Edge &e = g[u][i];
       if (level[e.to] == level[u] + 1) {
-        ll pushed = dfs(e.to, t, min(f, e.cap - e.flow));
+        int pushed = dfs(e.to, t, min(f, e.cap - e.flow));
         if (pushed > 0) {
           e.flow += pushed;
           g[e.to][e.rev].flow -= pushed;
@@ -51,18 +51,18 @@ struct Dinic {
     return 0;
   }
 
-  ll max_flow(int s, int t) {
-    ll flow = 0;
+  int max_flow(int s, int t) {
+    int flow = 0;
     while (bfs(s, t)) {
       fill(ptr.begin(), ptr.end(), 0);
-      while (ll pushed = dfs(s, t, 1e18))
+      while (int pushed = dfs(s, t, 1e18))
         flow += pushed;
     }
     return flow;
   }
 
   // Arestas do corte mínimo: visitáveis de s no grafo residual
-  vector<pair<int,int>> min_cut(int s) {
+  vector<pair<int, int>> min_cut(int s) {
     vector<bool> vis(n);
     queue<int> q;
     q.push(s); vis[s] = true;
@@ -74,7 +74,7 @@ struct Dinic {
           q.push(e.to);
         }
     }
-    vector<pair<int,int>> cut;
+    vector<pair<int, int>> cut;
     for (int u = 0; u < n; u++)
       if (vis[u])
         for (auto &e : g[u])

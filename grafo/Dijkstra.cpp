@@ -1,12 +1,12 @@
 // O((V + E)logV) ou O(E logV) - S(V)
-const ll N = 2e5 + 1, INF = 1e18;
-vector<vector<pair<ll, ll>>> graph;
-vector<ll> dist;
+const int N = 2e5 + 1, INF = 1e18;
+vector<vector<pair<int, int>>> graph;
+vector<int> dist;
 int n, m;
 
 void dijkstra(int s) {
   dist.assign(n + 1, INF);
-  priority_queue<pair<ll, ll>> pq;
+  priority_queue<pair<int, int>> pq;
   dist[s] = 0;
   pq.push({0, s});
 

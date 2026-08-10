@@ -1,7 +1,7 @@
 // a^b O(logN)
-ll bin_pow(ll a, ll b, const ll MOD = 1e9 + 7) {
+int bin_pow(int a, int b, const int MOD = 1e9 + 7) {
   a %= MOD;
-  ll res = 1;
+  int res = 1;
 
   while (b) {
     if (b % 2) res = res * a % MOD;
@@ -11,6 +11,6 @@ ll bin_pow(ll a, ll b, const ll MOD = 1e9 + 7) {
   return res;
 }
 
-ll inverso(ll a, ll MOD) {
-	bin_pow(a, MOD-2); // MOD deve ser primo
+int inverso(int a, int MOD) {
+  bin_pow(a, MOD - 2); // MOD deve ser primo
 }

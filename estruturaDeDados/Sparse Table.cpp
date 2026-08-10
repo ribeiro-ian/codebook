@@ -8,7 +8,7 @@ void build_sparse(vector<int> &v) {
   int n = v.size();
   log2.resize(n + 1);
   log2[1] = 0;
-  for (int i = 2; i <= n; i++) log2[i] = log2[i/2] + 1;
+  for (int i = 2; i <= n; i++) log2[i] = log2[i / 2] + 1;
 
   int K = log2[n] + 1;
   st.assign(K, vector<int>(n));
@@ -16,7 +16,7 @@ void build_sparse(vector<int> &v) {
 
   for (int j = 1; j < K; j++)
     for (int i = 0; i + (1 << j) <= n; i++)
-      st[j][i] = min(st[j-1][i], st[j-1][i + (1 << (j-1))]);
+      st[j][i] = min(st[j - 1][i], st[j - 1][i + (1 << (j - 1))]);
 }
 
 // Retorna mínimo no intervalo [L, R] (0-indexed, inclusivo)
@@ -41,19 +41,19 @@ void build_sparse2d(vector<vector<int>> &mat) {
   for (int j = 1; j < L; j++)
     for (int i = 0; i < n; i++)
       for (int k = 0; k + (1 << j) <= m; k++)
-        st2d[0][j][i][k] = min(st2d[0][j-1][i][k], st2d[0][j-1][i][k + (1 << (j-1))]);
+        st2d[0][j][i][k] = min(st2d[0][j - 1][i][k], st2d[0][j - 1][i][k + (1 << (j - 1))]);
 
   for (int i = 1; i < K; i++)
     for (int j = 0; j < L; j++)
       for (int k = 0; k + (1 << i) <= n; k++)
         for (int l = 0; l + (1 << j) <= m; l++)
-          st2d[i][j][k][l] = min(st2d[i-1][j][k][l], st2d[i-1][j][k + (1 << (i-1))][l]);
+          st2d[i][j][k][l] = min(st2d[i - 1][j][k][l], st2d[i - 1][j][k + (1 << (i - 1))][l]);
 }
 
 int query_min2d(int x1, int y1, int x2, int y2) {
   int i = log2[x2 - x1 + 1], j = log2[y2 - y1 + 1];
   return min({st2d[i][j][x1][y1],
-        st2d[i][j][x1][y2 - (1 << j) + 1],
-        st2d[i][j][x2 - (1 << i) + 1][y1],
-        st2d[i][j][x2 - (1 << i) + 1][y2 - (1 << j) + 1]});
+              st2d[i][j][x1][y2 - (1 << j) + 1],
+              st2d[i][j][x2 - (1 << i) + 1][y1],
+              st2d[i][j][x2 - (1 << i) + 1][y2 - (1 << j) + 1]});
 }

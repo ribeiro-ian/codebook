@@ -2,15 +2,15 @@
 // Retorna o fluxo maximo entre s e t
 // O(V * E^2)
 
-const ll INF = 1e18;
-vector<vector<ll>> cap;
-vector<vector<ll>> adj;
+const int INF = 1e18;
+vector<vector<int>> cap;
+vector<vector<int>> adj;
 int n, m;
 
-ll bfs(int s, int t, vector<ll>& pai) {
+int bfs(int s, int t, vector<int>& pai) {
   fill(pai.begin(), pai.end(), -1);
   pai[s] = -2;
-  queue<pair<ll, ll>> q;
+  queue<pair<int, int>> q;
   q.push({s, INF});
 
   while (!q.empty()) {
@@ -20,7 +20,7 @@ ll bfs(int s, int t, vector<ll>& pai) {
     for (auto& v : adj[u]) {
       if (pai[v] == -1 && cap[u][v] > 0) {
         pai[v] = u;
-        ll novo_fluxo = min(fluxo, cap[u][v]);
+        int novo_fluxo = min(fluxo, cap[u][v]);
         if (v == t) return novo_fluxo;
         q.push({v, novo_fluxo});
       }
@@ -30,10 +30,10 @@ ll bfs(int s, int t, vector<ll>& pai) {
   return 0;
 }
 
-ll ford_fulkerson(int s, int t) {
-  ll fluxo = 0;
-  vector<ll> pai(n + 1);
-  ll novo_fluxo;
+int ford_fulkerson(int s, int t) {
+  int fluxo = 0;
+  vector<int> pai(n + 1);
+  int novo_fluxo;
 
   while (novo_fluxo = bfs(s, t, pai)) {
     fluxo += novo_fluxo;
@@ -49,7 +49,7 @@ ll ford_fulkerson(int s, int t) {
   return fluxo;
 }
 // no main:
-adj.assign(n+1, {});
-cap.assign(n+1, vector<ll>(n+1));
+adj.assign(n + 1, {});
+cap.assign(n + 1, vector<int>(n + 1));
 // para cada aresta a-b com peso c:
 // adj[a].push_back(b); adj[b].push_back(a); cap[a][b] += c;

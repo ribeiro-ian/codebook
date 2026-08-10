@@ -11,9 +11,9 @@
 // Para caminho máximo: negar todos os pesos
 // Para ciclo positivo: negar todos os pesos e detectar ciclo negativo
 
-const ll INF = 1e18;
-vector<pair<int,ll>> adj[MXN]; // adj[u] = {v, peso}
-vector<ll> dist, pai;
+const int INF = 1e18;
+vector<pair<int, int>> adj[MXN]; // adj[u] = {v, peso}
+vector<int> dist, pai;
 vector<int> cnt; // quantas vezes cada vértice entrou na fila
 vector<bool> inQueue;
 int n, m;

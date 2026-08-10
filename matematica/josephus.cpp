@@ -10,19 +10,19 @@
 // Base: josephus(1) = 0
 // josephus(2n)   = 2*josephus(n) + 1
 // josephus(2n+1) = 2*josephus(n) - 1
-ll josephus2(ll n) {
+int josephus2(int n) {
   if (n == 1) return 0;
   if (n & 1) return 2 * josephus2(n / 2) + 1;
   return 2 * josephus2(n / 2) - 1;
 }
 
 // --- k arbitrário O(k log n) ---
-ll josephus(ll n, ll k) {
+int josephus(int n, int k) {
   if (n == 1) return 0;
   if (k == 1) return n - 1;
   if (k > n) return (josephus(n - 1, k) + k) % n;
-  ll cnt = n / k;
-  ll res = josephus(n - cnt, k);
+  int cnt = n / k;
+  int res = josephus(n - cnt, k);
   res -= n % k;
   if (res < 0) res += n;
   else res += res / (k - 1);
@@ -30,9 +30,9 @@ ll josephus(ll n, ll k) {
 }
 
 // --- Versão iterativa O(n) para n pequeno ---
-ll josephus_iter(ll n, ll k) {
-  ll res = 0;
-  for (ll i = 2; i <= n; i++)
+int josephus_iter(int n, int k) {
+  int res = 0;
+  for (int i = 2; i <= n; i++)
     res = (res + k) % i;
   return res; // 0-indexed
 }
