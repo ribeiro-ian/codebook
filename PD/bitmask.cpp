@@ -10,36 +10,36 @@ mask ^ (1 << i)   // inverte bit i
 mask & (1 << i)   // testa bit i (0 se desligado)
 
 bool isPowerOf2(int &n) {
-  return (n & (n - 1)) == 0;
+    return (n & (n - 1)) == 0;
 }
 int contarBits(int n) {
-  int ans = 0;
-  while (n > 0) {
-    n = n & (n - 1);
-    ans++;
-  }
-  return ans;
+    int ans = 0;
+    while (n > 0) {
+        n = n & (n - 1);
+        ans++;
+    }
+    return ans;
 }
 int to_binary(int n) {
-  int ans = 0;
-  int p = 1;
-  while (n > 0) {
-    int last_bit = (n & 1);
-    ans += p * last_bit;
-    p *= 10;
-    n >>= 1;
-  }
-  return ans;
+    int ans = 0;
+    int p = 1;
+    while (n > 0) {
+        int last_bit = (n & 1);
+        ans += p * last_bit;
+        p *= 10;
+        n >>= 1;
+    }
+    return ans;
 }
 void limparUltimosIBits(int &n, int i) {
-  int mask = (-1 << i);
-  n = n & mask;
+    int mask = (-1 << i);
+    n = n & mask;
 }
 void limparRangeBits(int &n, int i, int j) {
-  int a = (~0) << (j + 1); // ~0 == -1
-  int b = (1 << i) - 1;
-  int mask = a | b;
-  n = n & mask;
+    int a = (~0) << (j + 1); // ~0 == -1
+    int b = (1 << i) - 1;
+    int mask = a | b;
+    n = n & mask;
 }
 
 // --- Propriedades do conjunto ---
@@ -56,7 +56,7 @@ for (int mask = 0; mask < (1 << n); mask++) { }
 
 // Todos os bits ligados de mask
 for (int tmp = mask; tmp; tmp &= tmp - 1) {
-  int i = __builtin_ctz(tmp); // índice do bit
+    int i = __builtin_ctz(tmp); // índice do bit
 }
 
 // Todos os subconjuntos de mask (incluindo vazio)

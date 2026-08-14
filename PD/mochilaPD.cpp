@@ -3,22 +3,22 @@
 // Itera j de trás pra frente: evita usar o item duas vezes
 // O(N * W)
 void knapsack01(int n, int W, vector<int>& w, vector<int>& v) {
-  vector<int> dp(W + 1, 0);
-  for (int i = 0; i < n; i++)
-    for (int j = W; j >= w[i]; j--)
-      dp[j] = max(dp[j], dp[j - w[i]] + v[i]);
-  cout << dp[W] << '\n';
+    vector<int> dp(W + 1, 0);
+    for (int i = 0; i < n; i++)
+        for (int j = W; j >= w[i]; j--)
+            dp[j] = max(dp[j], dp[j - w[i]] + v[i]);
+    cout << dp[W] << '\n';
 }
 
 // Knapsack ilimitado — cada item pode ser usado infinitas vezes
 // Itera j da frente pra trás: permite reusar o mesmo item
 // O(N * W)
 void knapsack(int n, int W, vector<int>& w, vector<int>& v) {
-  vector<int> dp(W + 1, 0);
-  for (int i = 0; i < n; i++)
-    for (int j = w[i]; j <= W; j++)
-      dp[j] = max(dp[j], dp[j - w[i]] + v[i]);
-  cout << dp[W] << '\n';
+    vector<int> dp(W + 1, 0);
+    for (int i = 0; i < n; i++)
+        for (int j = w[i]; j <= W; j++)
+            dp[j] = max(dp[j], dp[j - w[i]] + v[i]);
+    cout << dp[W] << '\n';
 }
 
 // Knapsack 0/1 — quando W é muito grande, inverte dimensões
@@ -26,15 +26,15 @@ void knapsack(int n, int W, vector<int>& w, vector<int>& v) {
 // Útil quando V (soma dos valores) << W
 // O(N * V)
 void knapsack01ByValue(int n, int W, vector<int>& w, vector<int>& v) {
-  int total = 0;
-  for (int x : v) total += x;
-  vector<int> dp(total + 1, INF / 2);
-  dp[0] = 0;
-  for (int i = 0; i < n; i++)
-    for (int j = total; j >= v[i]; j--)
-      dp[j] = min(dp[j], dp[j - v[i]] + w[i]);
-  int ans = 0;
-  for (int j = 0; j <= total; j++)
-    if (dp[j] <= W) ans = j;
-  cout << ans << '\n';
+    int total = 0;
+    for (int x : v) total += x;
+    vector<int> dp(total + 1, INF / 2);
+    dp[0] = 0;
+    for (int i = 0; i < n; i++)
+        for (int j = total; j >= v[i]; j--)
+            dp[j] = min(dp[j], dp[j - v[i]] + w[i]);
+    int ans = 0;
+    for (int j = 0; j <= total; j++)
+        if (dp[j] <= W) ans = j;
+    cout << ans << '\n';
 }

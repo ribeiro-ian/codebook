@@ -35,24 +35,27 @@
 vector<int> p;
 
 void manacher(const string& s) {
-  string t = "@";
-  for (char c : s) t += "#" + string(1, c);
-  t += "#$";
+    string t = "@";
+    for (char c : s) t += "#" + string(1, c);
+    t += "#$";
 
-  int n = t.size();
-  p.assign(n, 0);
+    int n = t.size();
+    p.assign(n, 0);
 
-  int c = 0, r = 0;
-  for (int i = 1; i < n - 1; i++) {
-  int mirror = 2 * c - i;
-  if (i < r) p[i] = min(r - i, p[mirror]);
-  while (t[i + p[i] + 1] == t[i - p[i] - 1]) p[i]++;
-  if (i + p[i] > r) { c = i; r = i + p[i]; }
-  }
+    int c = 0, r = 0;
+    for (int i = 1; i < n - 1; i++) {
+        int mirror = 2 * c - i;
+        if (i < r) p[i] = min(r - i, p[mirror]);
+        while (t[i + p[i] + 1] == t[i - p[i] - 1]) p[i]++;
+        if (i + p[i] > r) {
+            c = i;
+            r = i + p[i];
+        }
+    }
 }
 
 // ímpar: centro real em t[2*i + 2]   (o próprio caractere)
 // par:   centro real em t[2*i + 3]   (o '#' entre i e i+1)
 int getLongest(int i, bool isOdd) {
-  return p[2 * i + 2 + !isOdd];
+    return p[2 * i + 2 + !isOdd];
 }
