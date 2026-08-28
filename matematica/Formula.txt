@@ -106,7 +106,7 @@ Identidade de Bézout:
   mdc(a, b) = a*x + b*y   (x, y inteiros)
 
 ----------------------------------------
-GEOMETRIA
+GEOMETRIA PLANA
 ----------------------------------------
 
 Distância euclidiana:
@@ -146,6 +146,120 @@ Setor circular:
 Fórmula de Herão (triângulo, lados a,b,c):
   s = (a + b + c) / 2
   A = sqrt(s * (s-a) * (s-b) * (s-c))
+
+** TRIÂNGULOS (Variações e Propriedades) **
+Equilátero:
+  A = (l^2 * sqrt(3)) / 4
+  Altura h = (l * sqrt(3)) / 2
+Com ângulo incluso:
+  A = (a * b * sin(θ)) / 2
+Usando Raio Inscrito (r):
+  A = p * r   (p = semiperímetro)
+Usando Raio Circunscrito (R):
+  A = (a * b * c) / (4 * R)
+Raio da Circunferência Circunscrita (Circumcircle):
+  R = a / (2 * sin(A))
+
+** POLÍGONOS REGULARES E CONVEXOS **
+Soma dos ângulos internos:
+  S = (n-2) * 180°
+Ângulo interno (regular):
+  θ_i = ((n-2) * 180°) / n
+Soma dos ângulos externos:
+  Sempre 360° (ou 2π radianos)
+Número de diagonais:
+  D = n * (n-3) / 2
+Área de Polígono Regular (dado lado l):
+  A = (n * l^2) / (4 * tan(π / n))
+
+** CÍRCULOS (Arcos, Setores e Segmentos) **
+Comprimento do Arco:
+  L = θ * R   (θ em radianos)
+  L = (θ / 360°) * 2πR   (θ em graus)
+Área do Segmento Circular (fatia cortada por corda):
+  A = (R^2 / 2) * (θ - sin(θ))   (θ em radianos)
+Comprimento da Corda:
+  C = 2 * R * sin(θ / 2)
+
+** QUADRILÁTEROS **
+Trapézio:
+  A = (B + b) * h / 2
+Paralelogramo:
+  A = b * h   ou   A = a * b * sin(θ)
+Losango:
+  A = (D * d) / 2   (Diagonais maior e menor)
+Quadrilátero Cíclico (Fórmula de Brahmagupta):
+  A = sqrt((s-a)*(s-b)*(s-c)*(s-d))   onde s = (a+b+c+d)/2
+
+----------------------------------------
+GEOMETRIA ESPACIAL (3D)
+----------------------------------------
+
+Esfera:
+  Volume = (4/3) * π * R^3
+  Área da superfície = 4 * π * R^2
+  Calota Esférica (Volume): V = (π * h^2 / 3) * (3R - h)   (h = altura da calota)
+
+Cilindro:
+  Volume = π * R^2 * h
+  Área = 2 * π * R * (R + h)
+
+Cone:
+  Volume = (1/3) * π * R^2 * h
+  Área = π * R * (R + g)   (geratriz g = sqrt(R^2 + h^2))
+
+Tetraedro Regular (Pirâmide base triangular):
+  Volume = (a^3 * sqrt(2)) / 12
+  Altura = (a * sqrt(6)) / 3
+
+----------------------------------------
+TEOREMAS CLÁSSICOS
+----------------------------------------
+
+Lei dos Senos:
+  a / sin(A) = b / sin(B) = c / sin(C) = 2R
+
+Lei dos Cossenos:
+  c^2 = a^2 + b^2 - 2ab*cos(C)
+
+Teorema de Ptolomeu (Quadriláteros Cíclicos):
+  a * c + b * d = d1 * d2   (lados a,b,c,d e diagonais d1,d2)
+
+Teorema de Stewart:
+  (Relação entre lados e ceviana d que divide base a em m e n)
+  b^2 * m + c^2 * n = a * (d^2 + m * n)
+
+Teorema das Bissetrizes:
+  (Bissetriz divide lado oposto em segmentos proporcionais)
+  x / c = y / b
+
+----------------------------------------
+ÁLGEBRA E RECORRÊNCIAS
+----------------------------------------
+
+Fórmula de Binet (Fibonacci em O(1)):
+  F_n = (1 / sqrt(5)) * ( ((1 + sqrt(5))/2)^n - ((1 - sqrt(5))/2)^n )
+
+Soma e Produto (Relações de Girard/Vieta):
+  Polinômio ax^2 + bx + c = 0:
+    x1 + x2 = -b / a
+    x1 * x2 = c / a
+  Polinômio ax^3 + bx^2 + cx + d = 0:
+    x1 + x2 + x3 = -b / a
+    x1*x2 + x1*x3 + x2*x3 = c / a
+    x1*x2*x3 = -d / a
+
+Desigualdade das Médias (AM-GM):
+  Média Aritmética >= Média Geométrica
+  (x1 + x2 + ... + xn) / n  >=  (x1 * x2 * ... * xn)^(1/n)
+
+Soma de Progressão Aritmético-Geométrica (P.A.G.):
+  Termo geral = (a + n * d) * r^n
+  Dica: Multiplicar a soma S por r e resolver S - r*S = ...
+
+Exponenciação de Matrizes:
+  Toda recorrência f(n) = a*f(n-1) + b*f(n-2) + c pode ser calculada em O(log n)
+  elevando a matriz de transição de estados à potência n.
 
 ----------------------------------------
 TEORIA DOS GRAFOS
