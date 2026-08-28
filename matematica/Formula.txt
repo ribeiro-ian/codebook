@@ -65,6 +65,22 @@ Coeficiente binomial — identidades úteis:
   Σ C(n, k) para k=0..n = 2^n
   Σ C(n, k)^2 para k=0..n = C(2n, n)
 
+Números de Stirling (segunda espécie):
+  S(n, k) = número de formas de particionar n elementos em k grupos não vazios
+  S(n, k) = k*S(n-1, k) + S(n-1, k-1)
+
+Números de Bell:
+  B_n = número total de partições de um conjunto de n elementos
+  B_n = Σ S(n, k) para k=0..n
+
+Derangements (permutações sem ponto fixo):
+  D(n) = (n-1) * (D(n-1) + D(n-2))
+  D(n) = n! * Σ (-1)^k / k!  para k=0..n
+  D(0)=1, D(1)=0, D(2)=1, D(3)=2, D(4)=9
+
+Lema de Burnside:
+  |X/G| = (1/|G|) * Σ |Fix(g)|  para g em G
+
 ----------------------------------------
 TEORIA DOS NÚMEROS
 ----------------------------------------
@@ -81,6 +97,7 @@ Função de Euler (totiente):
   φ(1) = 1
   Se p primo: φ(p) = p - 1
   Se p primo: φ(p^k) = p^k - p^(k-1)
+  Σ φ(d) para d divisor de n = n
 
 Pequeno Teorema de Fermat:
   a^p ≡ a (mod p)   para p primo
@@ -105,8 +122,20 @@ MDC / MMC:
 Identidade de Bézout:
   mdc(a, b) = a*x + b*y   (x, y inteiros)
 
+Teorema de Wilson:
+  (p-1)! ≡ -1 (mod p)   se e somente se p é primo
+
+Teorema de Wolstenholme:
+  Para p primo >= 5, C(2p, p) ≡ 2 (mod p^3)
+
+Contagem de primos até N (aproximação, Teorema dos Números Primos):
+  π(N) ≈ N / ln(N)
+
+Fórmula de Legendre (expoente de p em n!):
+  e_p(n!) = Σ floor(n / p^k) para k=1,2,3,...
+
 ----------------------------------------
-GEOMETRIA PLANA
+GEOMETRIA
 ----------------------------------------
 
 Distância euclidiana:
@@ -114,6 +143,9 @@ Distância euclidiana:
 
 Distância Manhattan:
   d = |x2-x1| + |y2-y1|
+
+Distância Chebyshev:
+  d = max(|x2-x1|, |y2-y1|)
 
 Área do triângulo (coordenadas):
   A = |x1*(y2-y3) + x2*(y3-y1) + x3*(y1-y2)| / 2
@@ -136,130 +168,193 @@ Teorema de Pick (polígono em grade inteira):
   B = pontos inteiros na borda
   A = área (Shoelace)
 
-Círculo:
-  Área = π * r^2
-  Perímetro = 2 * π * r
+--- Triângulos ---
 
-Setor circular:
-  Área = θ * r^2 / 2   (θ em radianos)
+Área (base x altura):
+  A = base * altura / 2
 
-Fórmula de Herão (triângulo, lados a,b,c):
+Fórmula de Herão (lados a,b,c):
   s = (a + b + c) / 2
   A = sqrt(s * (s-a) * (s-b) * (s-c))
 
-** TRIÂNGULOS (Variações e Propriedades) **
-Equilátero:
-  A = (l^2 * sqrt(3)) / 4
-  Altura h = (l * sqrt(3)) / 2
-Com ângulo incluso:
-  A = (a * b * sin(θ)) / 2
-Usando Raio Inscrito (r):
-  A = p * r   (p = semiperímetro)
-Usando Raio Circunscrito (R):
-  A = (a * b * c) / (4 * R)
-Raio da Circunferência Circunscrita (Circumcircle):
-  R = a / (2 * sin(A))
+Área via lei dos senos:
+  A = (a * b * sin(C)) / 2
 
-** POLÍGONOS REGULARES E CONVEXOS **
-Soma dos ângulos internos:
-  S = (n-2) * 180°
-Ângulo interno (regular):
-  θ_i = ((n-2) * 180°) / n
-Soma dos ângulos externos:
-  Sempre 360° (ou 2π radianos)
-Número de diagonais:
-  D = n * (n-3) / 2
-Área de Polígono Regular (dado lado l):
-  A = (n * l^2) / (4 * tan(π / n))
+Lei dos cossenos:
+  c^2 = a^2 + b^2 - 2*a*b*cos(C)
 
-** CÍRCULOS (Arcos, Setores e Segmentos) **
-Comprimento do Arco:
-  L = θ * R   (θ em radianos)
-  L = (θ / 360°) * 2πR   (θ em graus)
-Área do Segmento Circular (fatia cortada por corda):
-  A = (R^2 / 2) * (θ - sin(θ))   (θ em radianos)
-Comprimento da Corda:
-  C = 2 * R * sin(θ / 2)
+Lei dos senos:
+  a/sin(A) = b/sin(B) = c/sin(C) = 2R
+  (R = raio do circuncírculo)
 
-** QUADRILÁTEROS **
-Trapézio:
-  A = (B + b) * h / 2
-Paralelogramo:
-  A = b * h   ou   A = a * b * sin(θ)
-Losango:
-  A = (D * d) / 2   (Diagonais maior e menor)
-Quadrilátero Cíclico (Fórmula de Brahmagupta):
-  A = sqrt((s-a)*(s-b)*(s-c)*(s-d))   onde s = (a+b+c+d)/2
+Triângulo isósceles (lados iguais L, base B):
+  altura h = sqrt(L^2 - (B/2)^2)
+  A = B * h / 2
+
+Triângulo equilátero (lado L):
+  A = (sqrt(3)/4) * L^2
+  altura h = (sqrt(3)/2) * L
+
+Raio do incírculo:
+  r = A / s   (s = semiperímetro)
+
+Raio do circuncírculo:
+  R = (a * b * c) / (4 * A)
+
+Centroide:
+  G = ((x1+x2+x3)/3, (y1+y2+y3)/3)
+
+Soma dos ângulos internos de um triângulo:
+  180°
+
+--- Polígonos ---
+
+Soma dos ângulos internos de um polígono de N lados:
+  S = (N - 2) * 180°
+
+Ângulo interno de polígono regular de N lados:
+  a = (N - 2) * 180° / N
+
+Ângulo externo de polígono regular:
+  360° / N
+
+Área de polígono regular (lado L, N lados):
+  A = (N * L^2) / (4 * tan(π/N))
+
+Apótema de polígono regular:
+  ap = L / (2 * tan(π/N))
+
+Área de polígono regular (via apótema e perímetro):
+  A = ap * perímetro / 2
+
+Diagonais de um polígono de N lados:
+  D = N * (N - 3) / 2
+
+--- Quadriláteros ---
+
+Retângulo:
+  A = base * altura
+  Diagonal = sqrt(base^2 + altura^2)
+
+Quadrado (lado L):
+  A = L^2
+  Diagonal = L * sqrt(2)
+
+Losango (diagonais d1, d2):
+  A = d1 * d2 / 2
+
+Trapézio (bases b1, b2, altura h):
+  A = (b1 + b2) * h / 2
+
+Fórmula de Brahmagupta (quadrilátero cíclico, lados a,b,c,d):
+  s = (a+b+c+d)/2
+  A = sqrt((s-a)*(s-b)*(s-c)*(s-d))
+
+--- Círculo ---
+
+Área:
+  A = π * r^2
+
+Perímetro (circunferência):
+  C = 2 * π * r
+
+Setor circular (ângulo θ em radianos):
+  Área = θ * r^2 / 2
+  Comprimento do arco = θ * r
+
+Segmento circular (ângulo θ em radianos):
+  Área = r^2 * (θ - sin(θ)) / 2
+
+Comprimento de corda (ângulo central θ):
+  L = 2 * r * sin(θ/2)
+
+Área entre duas circunferências concêntricas (coroa circular):
+  A = π * (R^2 - r^2)
+
+Potência de um ponto em relação a um círculo:
+  pot = d^2 - r^2   (d = distância do ponto ao centro)
+
+--- Sólidos (área e volume) ---
+
+Cubo (aresta a):
+  V = a^3
+  A_total = 6*a^2
+
+Paralelepípedo (a,b,c):
+  V = a*b*c
+  A_total = 2*(ab + bc + ac)
+
+Esfera (raio r):
+  V = (4/3) * π * r^3
+  A_total = 4 * π * r^2
+
+Cilindro (raio r, altura h):
+  V = π * r^2 * h
+  A_lateral = 2 * π * r * h
+  A_total = 2*π*r*h + 2*π*r^2
+
+Cone (raio r, altura h, geratriz g = sqrt(r^2+h^2)):
+  V = π * r^2 * h / 3
+  A_lateral = π * r * g
+  A_total = π*r*g + π*r^2
+
+Pirâmide (área da base Ab, altura h):
+  V = Ab * h / 3
+
+Prisma (área da base Ab, altura h):
+  V = Ab * h
+
+Tronco de cone (raios R, r, altura h):
+  V = (π * h / 3) * (R^2 + R*r + r^2)
+
+--- Geometria analítica / vetores ---
+
+Ponto médio:
+  M = ((x1+x2)/2, (y1+y2)/2)
+
+Equação da reta (dois pontos):
+  (y - y1) / (y2 - y1) = (x - x1) / (x2 - x1)
+
+Distância de ponto a reta (ax+by+c=0):
+  d = |a*x0 + b*y0 + c| / sqrt(a^2 + b^2)
+
+Interseção de segmentos:
+  usar orientação (produto vetorial) para checar se os segmentos se cruzam
+
+Norma de um vetor:
+  |v| = sqrt(v.x^2 + v.y^2)
+
+Ângulo entre dois vetores:
+  cos(θ) = (a·b) / (|a|*|b|)
+
+Rotação de ponto (θ radianos, em torno da origem):
+  x' = x*cos(θ) - y*sin(θ)
+  y' = x*sin(θ) + y*cos(θ)
+
+Fecho convexo (Convex Hull) — Teorema:
+  Complexidade ótima O(n log n) (ex: Graham Scan, Andrew's Monotone Chain)
 
 ----------------------------------------
-GEOMETRIA ESPACIAL (3D)
+TEOREMAS ÚTEIS DIVERSOS
 ----------------------------------------
 
-Esfera:
-  Volume = (4/3) * π * R^3
-  Área da superfície = 4 * π * R^2
-  Calota Esférica (Volume): V = (π * h^2 / 3) * (3R - h)   (h = altura da calota)
+Teorema de Pitágoras:
+  a^2 + b^2 = c^2   (c = hipotenusa)
 
-Cilindro:
-  Volume = π * R^2 * h
-  Área = 2 * π * R * (R + h)
+Teorema de Tales:
+  retas paralelas cortadas por transversais formam segmentos proporcionais
 
-Cone:
-  Volume = (1/3) * π * R^2 * h
-  Área = π * R * (R + g)   (geratriz g = sqrt(R^2 + h^2))
+Teorema da Bissetriz Interna:
+  divide o lado oposto em segmentos proporcionais aos lados adjacentes
 
-Tetraedro Regular (Pirâmide base triangular):
-  Volume = (a^3 * sqrt(2)) / 12
-  Altura = (a * sqrt(6)) / 3
+Teorema de Ceva:
+  (AF/FB) * (BD/DC) * (CE/EA) = 1   (cevianas concorrentes)
 
-----------------------------------------
-TEOREMAS CLÁSSICOS
-----------------------------------------
+Teorema de Menelaus:
+  (AF/FB) * (BD/DC) * (CE/EA) = -1  (pontos colineares em transversal)
 
-Lei dos Senos:
-  a / sin(A) = b / sin(B) = c / sin(C) = 2R
-
-Lei dos Cossenos:
-  c^2 = a^2 + b^2 - 2ab*cos(C)
-
-Teorema de Ptolomeu (Quadriláteros Cíclicos):
-  a * c + b * d = d1 * d2   (lados a,b,c,d e diagonais d1,d2)
-
-Teorema de Stewart:
-  (Relação entre lados e ceviana d que divide base a em m e n)
-  b^2 * m + c^2 * n = a * (d^2 + m * n)
-
-Teorema das Bissetrizes:
-  (Bissetriz divide lado oposto em segmentos proporcionais)
-  x / c = y / b
-
-----------------------------------------
-ÁLGEBRA E RECORRÊNCIAS
-----------------------------------------
-
-Fórmula de Binet (Fibonacci em O(1)):
-  F_n = (1 / sqrt(5)) * ( ((1 + sqrt(5))/2)^n - ((1 - sqrt(5))/2)^n )
-
-Soma e Produto (Relações de Girard/Vieta):
-  Polinômio ax^2 + bx + c = 0:
-    x1 + x2 = -b / a
-    x1 * x2 = c / a
-  Polinômio ax^3 + bx^2 + cx + d = 0:
-    x1 + x2 + x3 = -b / a
-    x1*x2 + x1*x3 + x2*x3 = c / a
-    x1*x2*x3 = -d / a
-
-Desigualdade das Médias (AM-GM):
-  Média Aritmética >= Média Geométrica
-  (x1 + x2 + ... + xn) / n  >=  (x1 * x2 * ... * xn)^(1/n)
-
-Soma de Progressão Aritmético-Geométrica (P.A.G.):
-  Termo geral = (a + n * d) * r^n
-  Dica: Multiplicar a soma S por r e resolver S - r*S = ...
-
-Exponenciação de Matrizes:
-  Toda recorrência f(n) = a*f(n-1) + b*f(n-2) + c pode ser calculada em O(log n)
-  elevando a matriz de transição de estados à potência n.
+Teorema de Stewart (triângulo com ceviana d até lado a, dividindo-o em m e n):
+  b^2*m + c^2*n - d^2*a = a*m*n
 
 ----------------------------------------
 TEORIA DOS GRAFOS
@@ -282,6 +377,12 @@ Grafo euleriano (direcionado):
 Fórmula de Euler (grafo planar):
   V - E + F = 2   (V vértices, E arestas, F faces incluindo externa)
 
+Número máximo de arestas em grafo planar simples (N>=3):
+  E <= 3N - 6
+
+Teorema de Kirchhoff (número de árvores geradoras):
+  via matriz Laplaciana, teorema da árvore geradora (Matrix-Tree Theorem)
+
 ----------------------------------------
 PROBABILIDADE
 ----------------------------------------
@@ -299,6 +400,9 @@ Valor esperado:
 
 Variância:
   Var(X) = E[X^2] - E[X]^2
+
+Linearidade da esperança:
+  vale mesmo se X e Y não forem independentes
 
 ----------------------------------------
 EXPONENCIAÇÃO E LOGARITMOS
